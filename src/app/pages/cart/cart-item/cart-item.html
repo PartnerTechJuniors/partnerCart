@@ -1,0 +1,54 @@
+<div
+  class="shadow-lg p-5 rounded-2xl border-gray-300 flex justify-between items-center border-[1px] mt-2 bg-white"
+>
+  <div class="flex gap-5 items-center">
+    <img
+      [src]="item().image"
+      alt="{{ item().title }}"
+      class="w-20 h-20 object-contain"
+    />
+
+    <div>
+      <h3 class="text-lg font-semibold text-gray-800">
+        {{ item().title }}
+      </h3>
+      <p class="text-lg font-bold text-gray-900">
+        {{ item().price | currency: 'S/.' }}
+      </p>
+    </div>
+  </div>
+
+  <div class="flex items-end gap-10">
+    <div class="flex items-center border border-gray-300 rounded-lg overflow-hidden">
+      <button
+        type="button"
+        (click)="cartService.decreaseQuantity(item().id)"
+        class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-lg"
+      >
+        −
+      </button>
+
+      <input
+        type="text"
+        disabled="true"
+        [value]="item().quantity"
+        (input)="cartService.updateQuantity(item().id, $any($event.target).value)"
+        class="w-12 text-center text-gray-800 outline-none border-l border-r border-gray-300"
+        min="1"
+      />
+
+      <button
+        type="button"
+        (click)="cartService.addToCart(item())"
+        class="px-3 py-1 bg-gray-100 hover:bg-gray-200 text-gray-700 font-bold text-lg"
+      >
+        +
+      </button>
+    </div>
+
+    <app-button
+      label="Remove"
+      (btnClicked)="cartService.removeFromCart(item().id)"
+    />
+  </div>
+</div>
