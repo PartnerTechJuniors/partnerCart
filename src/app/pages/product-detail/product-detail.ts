@@ -6,6 +6,8 @@ import { PrimaryButton } from '../../components/primary-button/primary-button';
 import { CartService } from '../../services/cart';
 import { Stars } from "../products-list/product-card/stars/stars";
 import { Title } from '@angular/platform-browser';
+import { ProductService } from '../../services/product';
+import { slugToTitle } from '../../utils';
 
 @Component({
   selector: 'app-product-detail',
@@ -14,19 +16,20 @@ import { Title } from '@angular/platform-browser';
 })
 export class ProductDetail implements OnInit{
   cartService = inject(CartService);
-  productId =  '';
+  productService = inject(ProductService);
+  productSlug =  '';
   product = signal<Product | null>(null);
 
   constructor(private route: ActivatedRoute, private titleService: Title){
     this.route.params.subscribe(params => {
-      this.productId = params['id'];
+      this.productSlug = params['slug'];
     })
   }
 
   async ngOnInit(){
-    const res = await fetch(`https://dummyjson.com/products/${this.productId}`)
-    const data = await res.json();
-    this.product.set(data);
+    const title = slugToTitle(this.productSlug);
+    const productfilter = await this.productService.searchProduct(title);
+    this.product.set(productfilter[0]);
     this.titleService.setTitle('Producto - ' + this.product()?.title!);
   }
 }

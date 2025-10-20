@@ -16,7 +16,7 @@ export const routes: Routes = [
     component: Cart
   },
   {
-    path: 'product/:id',
+    path: 'product/:slug',
     component: ProductDetail
   },
   { path: '**', component: Notfound }

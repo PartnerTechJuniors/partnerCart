@@ -21,4 +21,16 @@ export class ProductService {
     const data = await res.json();
     return data;
   }
+
+  async getSingleProduct(productId: string){
+    const res = await fetch(`https://dummyjson.com/products/${productId}`)
+    const data = await res.json();
+    return data;
+  }
+
+  async searchProduct(search: string){
+    const res = await fetch(`https://dummyjson.com/products/search?q=${search}`)
+    const data = await res.json();
+    return data['products'];
+  }
 }
