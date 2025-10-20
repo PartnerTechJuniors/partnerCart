@@ -1,9 +1,15 @@
 <div class="p-4">
   <div class="flex gap-2">
-    <button routerLink="/" class="cursor-pointer bg-black text-white px-5  text-center items-center flex rounded-xl h-7 hover:bg-gray-700"><span>Atras</span></button>
-    <h2 class="text-xl font-bold mb-4">Shopping Cart</h2>
+    <button routerLink="/" class="cursor-pointer bg-black text-white px-5 text-center items-center flex rounded-lg h-8 hover:bg-gray-700"><span>Volver</span></button>
+    <h2 class="text-xl font-bold mb-4">Mi carrito de compras</h2>
   </div>
-  @for (item of cartService.cartitems(); track item.id) {
-    <app-cart-item [item]="item" />
+  @if (!cartService.cartitems().length){
+    <div class="w-full h-[40rem] flex justify-center items-center bg-gray-50 text-2xl text-gray-600">
+      <p>No hay productos agregados</p>
+    </div>
+  } @else {
+    @for (item of cartService.cartitems(); track item.id) {
+      <app-cart-item [item]="item" />
+    } 
   }
 </div>
