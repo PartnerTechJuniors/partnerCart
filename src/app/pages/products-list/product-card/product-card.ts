@@ -5,6 +5,7 @@ import { CartService } from '../../../services/cart';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from "@angular/router";
 import { Stars } from "./stars/stars";
+import { titleToSlug } from '../../../utils';
 
 @Component({
   selector: 'app-product-card',
@@ -21,5 +22,9 @@ export class ProductCard {
 
   discountPercentageRound(){
     return Math.round(this.p().discountPercentage)
+  }
+
+  convertToSlug(title: string){
+    return titleToSlug(title);
   }
 }
