@@ -4,8 +4,7 @@ import { Component, input, output } from '@angular/core';
 @Component({
   selector: 'app-primary-button',
   imports: [NgClass],
-  templateUrl: './primary-button.html',
-  styleUrl: './primary-button.css'
+  templateUrl: './primary-button.html'
 })
 export class PrimaryButton {
   label = input();
