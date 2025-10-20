@@ -6,7 +6,8 @@ export const routes: Routes = [
   {
     path: '',
     pathMatch: 'full',
-    component: ProductsList
+    component: ProductsList,
+    title: 'Productos'
   },
   {
     path: 'cart',
