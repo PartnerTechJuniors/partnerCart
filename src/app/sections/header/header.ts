@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
-import { PrimaryButton } from "../../components/primary-button/primary-button";
-import { CartService } from '../../services/cart';
+import { PrimaryButton } from "@components/primary-button/primary-button";
+import { CartService } from '@services/cart';
 import { RouterLink } from "@angular/router";
 
 @Component({

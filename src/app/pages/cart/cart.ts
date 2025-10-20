@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { CartService } from '../../services/cart';
+import { CartService } from '@services/cart';
 import { CartItem } from "./cart-item/cart-item";
 import { RouterLink } from "@angular/router";
 import { Title } from '@angular/platform-browser';

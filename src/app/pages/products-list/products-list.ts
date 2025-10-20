@@ -1,8 +1,8 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
-import { Product } from '../../types/product';
+import { Product } from '@app/types/product';
 import { ProductCard } from './product-card/product-card';
 import { Skeleton } from './skeleton/skeleton';
-import { ProductService } from '../../services/product';
+import { ProductService } from '@services/product';
 import { NgClass } from '@angular/common';
 
 @Component({

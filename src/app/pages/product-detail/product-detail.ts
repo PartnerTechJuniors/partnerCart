@@ -1,13 +1,13 @@
 import { Component, inject, OnInit, signal } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Product } from '../../types/product';
+import { Product } from '@app/types/product';
 import { CommonModule } from '@angular/common';
-import { PrimaryButton } from '../../components/primary-button/primary-button';
-import { CartService } from '../../services/cart';
-import { Stars } from "../products-list/product-card/stars/stars";
+import { PrimaryButton } from '@components/primary-button/primary-button';
+import { CartService } from '@services/cart';
+import { Stars } from "@pages/products-list/product-card/stars/stars";
 import { Title } from '@angular/platform-browser';
-import { ProductService } from '../../services/product';
-import { slugToTitle } from '../../utils';
+import { ProductService } from '@services/product';
+import { slugToTitle } from '@app/utils';
 import { Skeleton } from './skeleton/skeleton';
 
 @Component({
