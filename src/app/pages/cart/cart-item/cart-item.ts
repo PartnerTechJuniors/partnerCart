@@ -7,8 +7,7 @@ import { Product } from '../../../types/product';
 @Component({
   selector: 'app-cart-item',
   imports: [CommonModule, Button],
-  templateUrl: './cart-item.html',
-  styleUrl: './cart-item.css'
+  templateUrl: './cart-item.html'
 })
 export class CartItem {
   cartService = inject(CartService)
