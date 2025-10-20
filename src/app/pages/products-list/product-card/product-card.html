@@ -1,33 +1,46 @@
-<div class="w-full max-w-sm bg-white border border-gray-200 rounded-xl shadow-md flex flex-col overflow-hidden relative transition-all hover:shadow-lg">
-  <a href="#" class="">
+<div class="w-full bg-white rounded-xl shadow-md flex flex-col overflow-hidden relative transition-all ">
+  <div [routerLink]="['product', p().id]" class="cursor-pointer p-3">
     <img
-      class="w-full object-contain p-6 rounded-t-xl max-h-56 mx-auto mt-4"
-      [src]="p().image"
+      class="w-full object-contain p-6 rounded-t-xl max-h-56 mx-auto mt-4 h-56 hover:scale-110 transition-all transform duration-700"
+      [src]="p().thumbnail"
       alt="product image"
       loading="eager"
     />
-  </a>
-
-  <span
-    class="absolute top-3 right-3 text-xs font-semibold px-2.5 py-0.5 rounded-md" [class]="p().stock ? 'bg-blue-100 text-blue-800 dark:bg-blue-200 dark:text-blue-900' : 'bg-red-100 text-red-800 dark:bg-red-200 dark:text-red-900'"
-  >
-    @if(p().stock){ {{ p().stock }} left } @else { Out of stock }
-  </span>
-
-  <div class="flex flex-col justify-between flex-1 px-5 pb-5">
+  
+    <span
+      class="absolute top-3 right-3 text-xs font-semibold px-2.5 py-0.5 rounded-md" [class]="p().stock ? 'bg-blue-100 text-blue-800 dark:bg-blue-200 dark:text-blue-900' : 'bg-red-100 text-red-800 dark:bg-red-200 dark:text-red-900'"
+    >
+      @if(p().stock){ {{ p().stock }} left } @else { Out of stock }
+    </span>
+  
     <div>
+      <p class="uppercase text-sm">
+        {{ p().brand || 'GENERICA'}}
+      </p>
       <h5
-        class="text-lg font-semibold tracking-tight text-gray-900 leading-snug line-clamp-2 h-14"
+        class="text-base font-semibold tracking-tight text-gray-900 leading-snug line-clamp-2 h-14"
       >
         {{ p().title }}
       </h5>
-      <span class="text-lg font-bold text-gray-900">
-        {{ p().price | currency: 'S/. ' }}
-      </span>
+      <div class="pb-3">
+        <app-stars [rating]="p().rating" />
+      </div>
+      
+      <div class="font-medium flex flex-col">
+        <div class="flex gap-2">
+          <span class="text-lg text-gray-500">{{ priceWithDiscount() | currency: 'S/ ' }}</span>
+          @if(discountPercentageRound() > 0){
+            <div class="bg-red-500 text-white p-1 rounded-md text-xs">-{{ discountPercentageRound() }}%</div>
+          }
+        </div>
+        <span class="text-base line-through text-gray-400"
+          [ngClass]="discountPercentageRound() > 0 ? 'opacity-100' : 'opacity-0'"
+        >{{ p().price | currency: 'S/ ' }}</span>
+      </div>
     </div>
+  </div>
 
-    <div class="pt-3">
-      <app-primary-button label="Add to cart" (btnClick)="cartService.addToCart(p())" [isDisabled]="p().stock === 0" />
-    </div>
+  <div class="p-3">
+    <app-primary-button label="+ Add to cart" (btnClick)="cartService.addToCart(p())" [isDisabled]="p().stock === 0" />
   </div>
 </div>
