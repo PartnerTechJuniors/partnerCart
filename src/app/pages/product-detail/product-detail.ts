@@ -8,10 +8,11 @@ import { Stars } from "../products-list/product-card/stars/stars";
 import { Title } from '@angular/platform-browser';
 import { ProductService } from '../../services/product';
 import { slugToTitle } from '../../utils';
+import { Skeleton } from './skeleton/skeleton';
 
 @Component({
   selector: 'app-product-detail',
-  imports: [CommonModule, PrimaryButton, Stars],
+  imports: [CommonModule, PrimaryButton, Stars, Skeleton],
   templateUrl: './product-detail.html'
 })
 export class ProductDetail implements OnInit{

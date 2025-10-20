@@ -1,44 +1,48 @@
-<section class="py-8 bg-white md:py-16 antialiased">
-    <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
-      <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
-        <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
-          <img class="w-full block" [src]="product()?.thumbnail" alt="" />
-        </div>
-
-        <div class="mt-6 sm:mt-8 lg:mt-0">
-          <h1
-            class="text-xl font-semibold text-gray-900 sm:text-2xl "
-          >
-            {{product()?.title}}
-          </h1>
-          <div class="mt-4 sm:items-center sm:gap-4 sm:flex">
-            <p
-              class="text-2xl font-extrabold text-gray-900 sm:text-3xl "
+@defer {
+  <section class="p-5 bg-white md:py-16 antialiased">
+      <div class="max-w-screen-xl px-4 mx-auto 2xl:px-0">
+        <div class="lg:grid lg:grid-cols-2 lg:gap-8 xl:gap-16">
+          <div class="shrink-0 max-w-md lg:max-w-lg mx-auto">
+            <img class="w-full object-contain hover:scale-110 transition-all transform duration-700" [src]="product()?.thumbnail" [alt]="product()?.title" />
+          </div>
+  
+          <div class="mt-6 sm:mt-8 lg:mt-0">
+            <h1
+              class="text-xl font-semibold text-gray-900 sm:text-2xl "
             >
-              {{product()?.price | currency: 'S/ '}}
-            </p>
-
-            <div class="flex items-center gap-2 mt-2 sm:mt-0">
-              <app-stars [rating]="product()?.rating!"/>
-              <a
-                href="#"
-                class="text-sm font-medium leading-none text-gray-900 underline hover:no-underline"
+              {{product()?.title}}
+            </h1>
+            <div class="mt-4 sm:items-center sm:gap-4 sm:flex">
+              <p
+                class="text-2xl font-extrabold text-gray-900 sm:text-3xl "
               >
-                {{ product()?.reviews?.length}} revisores
-              </a>
+                {{product()?.price | currency: 'S/ '}}
+              </p>
+  
+              <div class="flex items-center gap-2 mt-2 sm:mt-0">
+                <app-stars [rating]="product()?.rating!"/>
+                <a
+                  href="#"
+                  class="text-sm font-medium leading-none text-gray-900 underline hover:no-underline"
+                >
+                  {{ product()?.reviews?.length}} revisores
+                </a>
+              </div>
             </div>
+  
+            <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
+              <app-primary-button label="+ Add to cart" (btnClick)="cartService.addToCart(product()!)" [isDisabled]="product()?.stock === 0" />
+            </div>
+  
+            <hr class="my-6 md:my-8 border-gray-200" />
+  
+            <p class="mb-6 text-gray-500">
+              {{ product()?.description }}
+            </p>
           </div>
-
-          <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
-            <app-primary-button label="+ Add to cart" (btnClick)="cartService.addToCart(product()!)" [isDisabled]="product()?.stock === 0" />
-          </div>
-
-          <hr class="my-6 md:my-8 border-gray-200" />
-
-          <p class="mb-6 text-gray-500">
-            {{ product()?.description }}
-          </p>
         </div>
       </div>
-    </div>
   </section>
+} @placeholder (minimum 500ms){
+  <app-skeleton />
+}
