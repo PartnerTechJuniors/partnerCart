@@ -33,4 +33,12 @@ export class ProductDetail implements OnInit{
     this.product.set(productfilter[0]);
     this.titleService.setTitle('Producto - ' + this.product()?.title!);
   }
+
+   priceWithDiscount(){
+    return this.product()!.price * (1 - this.product()!.discountPercentage / 100);
+  }
+
+  discountPercentageRound(){
+    return Math.round(this.product()!.discountPercentage);
+  }
 }
