@@ -13,8 +13,15 @@
       <p>No hay productos agregados</p>
     </div>
   } @else {
-    @for (item of cartService.cartitems(); track item.id) {
-      <app-cart-item [item]="item" />
-    } 
+    <div class="flex gap-2">
+      <div class="w-9/12 bg-white rounded-lg p-5">
+        @for (item of cartService.cartitems(); track item.id) {
+          <app-cart-item [item]="item" />
+        } 
+      </div>
+      <div class="w-1/4 bg-white rounded-lg p-5">
+
+      </div>
+    </div>
   }
 </div>
