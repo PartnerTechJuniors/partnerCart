@@ -9,6 +9,10 @@ export class CartService {
 
   public cartitems = this.cart.asReadonly();
   
+  countQuantityProduct() {
+    return this.cartitems().reduce((total, p) => total + p.quantity!, 0);
+  }
+
   addToCart(product: Product) {
     this.cart.update(items => {
       const index = items.findIndex(p => p.id === product.id);

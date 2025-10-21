@@ -15,7 +15,7 @@ export class Cart {
   location = inject(Location);
   
   constructor(private titleService: Title){
-    this.titleService.setTitle(`Mi carrito - ${this.cartService.cartitems().length} articulos`);
+    this.titleService.setTitle(`Mi carrito - ${this.cartService.countQuantityProduct()} articulos`);
   }
 
   goback(){
