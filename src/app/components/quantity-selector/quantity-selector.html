@@ -1,0 +1,26 @@
+<div class="flex items-center text-base">
+  <button
+    type="button"
+    (click)="cartService.decreaseQuantity(item().id)"
+    class=" bg-gray-900 text-gray-200 font-semibold flex items-center px-2 py-1 cursor-pointer rounded-md"
+  >
+    −
+  </button>
+
+  <input
+    type="text"
+    [disabled]="true"
+    [value]="item().quantity"
+    (input)="cartService.updateQuantity(item().id, $any($event.target).value)"
+    class="w-12 text-center text-gray-800 outline-none border-l border-r border-gray-300"
+    min="1"
+  />
+
+  <button
+    type="button"
+    (click)="cartService.addToCart(item())"
+    class=" bg-gray-900 text-gray-200 font-semibold flex items-center px-2 py-1 cursor-pointer rounded-md"
+  >
+    +
+  </button>
+</div>
