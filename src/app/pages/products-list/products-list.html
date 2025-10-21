@@ -1,57 +1,62 @@
 <div class="py-4">
-  <div class="flex sm:flex-row flex-col sm:gap-3 gap-2">
-    <div class="w-full sm:w-1/4 bg-white rounded-2xl px-2 py-4 max-h-max">
-      
-      <h2 class="text-xl font-bold m-2">Categorias</h2>
-      <div class="overflow-x-auto sm:overflow-x-hidden flex flex-col sm:h-96 h-auto">
-        <div class="sm:block flex sm:text-base text-sm">
-          @for (cat of categories(); track cat){
-            @defer (on viewport) {
-              <button (click)="filterByCategory(cat)" class="bg-gray-100 px-2 py-1 rounded-sm cursor-pointer m-1 transition-color border border-gray-200"
-              [ngClass]="categoryActive() == cat ? 'bg-gray-300 font-semibold': 'hover:bg-gray-200'"
-              >{{ cat }}</button>
-            } @placeholder (minimum 200ms){
-              <button class="bg-gray-100 animate-pulse rounded-sm m-1 px-2 py-1 text-transparent">
-                {{ cat }}
+  @defer {
+    <div class="flex sm:flex-row flex-col sm:gap-3 gap-2">
+      <div class="w-full sm:w-1/4 bg-white rounded-2xl px-2 py-4 max-h-max">
+        
+        <h2 class="text-xl font-bold m-2">Categorias</h2>
+        <div class="overflow-x-auto sm:overflow-x-hidden flex flex-col sm:h-96 h-auto">
+          <div class="sm:block flex sm:text-base text-sm">
+            @for (cat of categories(); track cat){
+              @defer (on viewport) {
+                <button (click)="filterByCategory(cat)" class="bg-gray-100 px-2 py-1 rounded-sm cursor-pointer m-1 transition-color border border-gray-200"
+                [ngClass]="categoryActive() == cat ? 'bg-gray-300 font-semibold': 'hover:bg-gray-200'"
+                >{{ cat }}</button>
+              } @placeholder (minimum 200ms){
+                <button class="bg-gray-100 animate-pulse rounded-sm m-1 px-2 py-1 text-transparent">
+                  {{ cat }}
+                </button>
+              }
+            }
+          </div>
+        </div>
+
+        <h2 class="text-xl font-bold m-2">Marcas</h2>
+        <div class="overflow-x-auto sm:overflow-x-hidden flex flex-col sm:h-96 h-auto">
+          <div class="sm:block flex sm:text-base text-sm">
+            @for (brand of brands(); track brand){
+              <button (click)="filterByBrand(brand)" 
+                class="bg-gray-100 px-2 py-1 rounded-sm cursor-pointer m-1 transition-color border border-gray-200"
+                [ngClass]="brandActive() == brand ? 'bg-gray-300 font-semibold': 'hover:bg-gray-200'">
+                {{ brand }}
               </button>
+            }
+          </div>
+        </div>
+      </div>
+      <div class="w-full">
+        <div class="bg-white px-3 py-4 rounded-xl mb-3 flex justify-between">
+          <div class="flex sm:gap-7 gap-2 text-sm">
+            <span class="text-gray-500">Resultados ({{ products().length }})</span>
+            <button (click)="clearFilters()" class="underline cursor-pointer">Limpiar filtros</button>
+          </div>
+          <!-- Pagination -->
+          <div>
+            
+          </div>
+        </div>
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+          @for (p of products(); track p.id) {
+            @defer (on viewport) {
+              <app-product-card [p]="p" />
+            } @placeholder (minimum 500ms){
+              <app-skeleton />
             }
           }
         </div>
       </div>
-
-      <h2 class="text-xl font-bold m-2">Marcas</h2>
-      <div class="overflow-x-auto sm:overflow-x-hidden flex flex-col sm:h-96 h-auto">
-        <div class="sm:block flex sm:text-base text-sm">
-          @for (brand of brands(); track brand){
-            <button (click)="filterByBrand(brand)" 
-              class="bg-gray-100 px-2 py-1 rounded-sm cursor-pointer m-1 transition-color border border-gray-200"
-              [ngClass]="brandActive() == brand ? 'bg-gray-300 font-semibold': 'hover:bg-gray-200'">
-              {{ brand }}
-            </button>
-          }
-        </div>
-      </div>
     </div>
-    <div class="w-full">
-      <div class="bg-white px-3 py-4 rounded-xl mb-3 flex justify-between">
-        <div class="flex sm:gap-7 gap-2 text-sm">
-          <span class="text-gray-500">Resultados ({{ products().length }})</span>
-          <button (click)="clearFilters()" class="underline cursor-pointer">Limpiar filtros</button>
-        </div>
-        <!-- Pagination -->
-        <div>
-          
-        </div>
-      </div>
-      <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
-        @for (p of products(); track p.id) {
-          @defer (on viewport) {
-            <app-product-card [p]="p" />
-          } @placeholder (minimum 500ms){
-            <app-skeleton />
-          }
-        }
-      </div>
+  } @placeholder {
+    <div class="bg-white w-full h-dvh">
     </div>
-  </div>
+  }
 </div>
