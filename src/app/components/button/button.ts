@@ -6,7 +6,6 @@ import { Component, input, output } from '@angular/core';
   templateUrl: './button.html'
 })
 export class Button {
-  label = input();
-
+  label = input<string>('');
   btnClicked = output();
 }
