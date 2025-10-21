@@ -13,6 +13,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputMode": "static",
             "browser": "src/main.ts",
             "tsConfig": "tsconfig.app.json",
             "assets": [
@@ -27,6 +28,8 @@
           },
           "configurations": {
             "production": {
+              "optimization": true,
+              "aot": true,
               "budgets": [
                 {
                   "type": "initial",
