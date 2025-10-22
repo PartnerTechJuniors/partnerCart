@@ -13,6 +13,23 @@ export class CartService {
     return this.cartitems().reduce((total, p) => total + p.quantity!, 0);
   }
 
+  countQuantityProductWithoutDiscount() {
+    return this.cartitems()
+        .filter(p => Math.round(p.discountPercentage) > 0)
+        .reduce((total, p) => total + p.quantity!, 0);
+  }
+
+  getTotalCart() {
+    return this.cartitems().reduce((total, p) => total + (p.price * p.quantity!), 0);
+  }
+
+  getTotalCartWithDiscount() {
+    return this.cartitems().reduce((total, p) => {
+      const priceWithDiscount = p.price * (1 - (p.discountPercentage || 0) / 100);
+      return total + priceWithDiscount * p.quantity!;
+    }, 0);
+  }
+
   addToCart(product: Product) {
     this.cart.update(items => {
       const index = items.findIndex(p => p.id === product.id);
@@ -58,6 +75,10 @@ export class CartService {
 
   clearCart() {
     this.cart.set([]);
+  }
+
+  continuePurchase(){
+    alert('Otro dia joven, no disponible para prepagos chevere ');
   }
 
   constructor() { }

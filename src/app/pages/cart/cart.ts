@@ -3,11 +3,12 @@ import { CartService } from '@services/cart';
 import { CartItem } from "./cart-item/cart-item";
 import { RouterLink } from "@angular/router";
 import { Title } from '@angular/platform-browser';
-import { Location } from '@angular/common';
+import { CurrencyPipe, Location } from '@angular/common';
+import { PrimaryButton } from "@componentsprimary-button/primary-button";
 
 @Component({
   selector: 'app-cart',
-  imports: [CartItem, RouterLink],
+  imports: [CartItem, RouterLink, CurrencyPipe, PrimaryButton],
   templateUrl: './cart.html'
 })
 export class Cart {
