@@ -1,26 +1,17 @@
 <div class="flex items-center text-base">
-  <button
-    type="button"
-    (click)="cartService.decreaseQuantity(item().id)"
-    class=" bg-gray-900 text-gray-200 font-semibold flex items-center px-2 py-1 cursor-pointer rounded-md"
-  >
-    −
-  </button>
-
-  <input
-    type="text"
-    [disabled]="true"
-    [value]="item().quantity"
-    (input)="cartService.updateQuantity(item().id, $any($event.target).value)"
-    class="w-12 text-center text-gray-800 outline-none border-l border-r border-gray-300"
-    min="1"
+  <app-button
+    [extraClass]="'bg-gray-900 text-gray-200 font-semibold px-3 py-1'"
+    (btnClicked)="cartService.decreaseQuantity(item().id)"
+    label="-"
   />
 
-  <button
-    type="button"
-    (click)="cartService.addToCart(item())"
-    class=" bg-gray-900 text-gray-200 font-semibold flex items-center px-2 py-1 cursor-pointer rounded-md"
-  >
-    +
-  </button>
+  <span class="w-10 text-center text-gray-800 outline-none border-l border-r border-gray-300">
+    {{ item().quantity }}
+  </span>
+
+  <app-button
+    [extraClass]="'bg-gray-900 text-gray-200 font-semibold px-2.5 py-1'"
+    (btnClicked)="cartService.addToCart(item())"
+    label="+"
+  />
 </div>
