@@ -1,4 +1,6 @@
-<button class="bg-gray-100 rounded-lg p-2 cursor-pointer flex gap-2" (click)="btnClicked.emit()">
+<button class="bg-gray-100 rounded-lg p-2 cursor-pointer flex gap-2" 
+  [ngClass]="extraClass()"  
+  (click)="btnClicked.emit()">
   <ng-content />
   {{ label() }}
 </button>

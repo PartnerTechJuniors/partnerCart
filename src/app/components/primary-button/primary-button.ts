@@ -7,7 +7,8 @@ import { Component, input, output } from '@angular/core';
   templateUrl: './primary-button.html'
 })
 export class PrimaryButton {
-  label = input();
-  isDisabled = input(false);
-  btnClick = output();
+  label = input.required<string>();
+  extraClass = input<string>('');
+  isDisabled = input<boolean>(false);
+  btnClick = output<void>();
 }
