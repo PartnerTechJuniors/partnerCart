@@ -14,7 +14,7 @@
               {{product()?.title}}
             </h1>
 
-            <div class="flex items-center gap-2 mt-2 sm:mt-0">
+            <div class="flex items-center gap-2 my-2 sm:mt-0">
               <app-stars [rating]="product()?.rating!"/>
               <a
                 href="#"
@@ -24,17 +24,7 @@
               </a>
             </div>
 
-            <div class="font-medium flex flex-col mt-5">
-                <div class="flex gap-2">
-                  <span class="text-2xl text-gray-500">{{ priceWithDiscount() | currency: 'S/ ' }}</span>
-                  @if(discountPercentageRound() > 0){
-                    <div class="bg-red-500 text-white p-1 rounded-md text-xs">-{{ discountPercentageRound() }}%</div>
-                  }
-                </div>
-                <span class="text-lg line-through text-gray-400"
-                  [ngClass]="discountPercentageRound() > 0 ? 'opacity-100' : 'opacity-0'"
-                >{{ product()?.price | currency: 'S/ ' }}</span>
-            </div>
+            <app-prices [price]="product()?.price!" [discountPercentage]="product()?.discountPercentage!" />
   
             <div class="mt-6 sm:gap-4 sm:items-center sm:flex sm:mt-8">
               <app-primary-button label="+ Add to cart" (btnClick)="cartService.addToCart(product()!)" [isDisabled]="product()?.stock === 0" />

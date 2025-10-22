@@ -26,17 +26,8 @@
         <app-stars [rating]="p().rating" />
       </div>
       
-      <div class="font-medium flex flex-col">
-        <div class="flex gap-2">
-          <span class="text-lg text-gray-500">{{ priceWithDiscount() | currency: 'S/ ' }}</span>
-          @if(discountPercentageRound() > 0){
-            <div class="bg-red-500 text-white p-1 rounded-md text-xs">-{{ discountPercentageRound() }}%</div>
-          }
-        </div>
-        <span class="text-base line-through text-gray-400"
-          [ngClass]="discountPercentageRound() > 0 ? 'opacity-100' : 'opacity-0'"
-        >{{ p().price | currency: 'S/ ' }}</span>
-      </div>
+      <app-prices [price]="p().price" [discountPercentage]="p().discountPercentage" />
+
     </div>
   </div>
 
