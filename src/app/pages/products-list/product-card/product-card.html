@@ -1,4 +1,4 @@
-<div class="w-full bg-white rounded-xl shadow-md flex flex-col overflow-hidden relative transition-all ">
+<div class="w-full bg-white rounded-xl shadow-md flex flex-col overflow-hidden relative transition-all group">
   <div [routerLink]="['product', convertToSlug(p().title)]" class="cursor-pointer p-3">
     <img
       class="w-full object-contain p-6 rounded-t-xl max-h-56 mx-auto mt-4 h-56 hover:scale-110 transition-all transform duration-700"
@@ -41,6 +41,10 @@
   </div>
 
   <div class="p-3">
-    <app-primary-button label="+ Add to cart" (btnClick)="cartService.addToCart(p())" [isDisabled]="p().stock === 0" />
+    <app-primary-button 
+    label="Agregar al carro" 
+    [extraClass]="'group-hover:opacity-100 opacity-0 animation-opacity duration-300 text-lg'"
+    (btnClick)="cartService.addToCart(p())" 
+    [isDisabled]="p().stock === 0" />
   </div>
 </div>
