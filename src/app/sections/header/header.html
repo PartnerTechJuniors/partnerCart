@@ -1,9 +1,14 @@
-<div class="w-full py-2 px-10 fixed bg-white top-0 left-0 z-50 shadow-sm">
-  <header class="flex justify-between items-center max-w-7xl mx-auto">
-    <div class="flex items-center cursor-pointer" routerLink="/">
-      <img src="/favicon.png" alt="" class="size-12 mr-1">
-      <span class="text-lg font-semibold">{{ nameShop() }}</span>
-    </div>
-    <app-primary-button [label]="'Cart (' + cartService.countQuantityProduct() + ')'" [routerLink]="['/cart']"/>
-  </header>
-</div>
+@defer(){
+  <div class="w-full py-2 px-10 fixed bg-white top-0 left-0 z-50 shadow-sm">
+    <header class="flex justify-between items-center max-w-7xl mx-auto">
+      <div class="flex items-center cursor-pointer" routerLink="/">
+        <img src="/favicon.png" alt="" class="size-12 mr-1">
+        <span class="text-lg font-semibold">{{ nameShop() }}</span>
+      </div>
+      <app-primary-button [label]="'Cart (' + cartService.countQuantityProduct() + ')'" [routerLink]="['/cart']"/>
+    </header>
+  </div>
+} @placeholder {
+  <div class="bg-white w-full h-16">
+  </div>
+}
