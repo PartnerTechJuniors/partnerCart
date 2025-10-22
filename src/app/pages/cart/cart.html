@@ -9,8 +9,9 @@
     <h2 class="text-xl font-bold mb-4">Mi carrito de compras</h2>
   </div>
   @if (!cartService.cartitems().length){
-    <div class="w-full h-[40rem] flex justify-center items-center bg-white text-2xl text-gray-600">
-      <p>No hay productos agregados</p>
+    <div class="w-full h-[40rem] flex justify-center items-center bg-white text-2xl text-gray-600 gap-5">
+      <app-iconcart [extraClass]="'size-20'" />
+      <p>Tu carro esta vacio</p>
     </div>
   } @else {
     <div class="flex gap-2">
