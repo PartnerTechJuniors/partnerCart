@@ -1,11 +1,11 @@
 import { Component, inject, input } from '@angular/core';
-import { Product } from '../../../types/product';
-import { PrimaryButton } from "../../../components/primary-button/primary-button";
-import { CartService } from '../../../services/cart';
+import { Product } from '@app/types/product';
+import { PrimaryButton } from '@components/primary-button/primary-button';
+import { CartService } from '@services/cart';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from "@angular/router";
 import { Stars } from "./stars/stars";
-import { titleToSlug } from '../../../utils';
+import { titleToSlug } from '@app/utils';
 
 @Component({
   selector: 'app-product-card',
