@@ -1,0 +1,11 @@
+<div class="font-medium flex flex-col justify-start content-start items-start">
+    <div class="flex gap-2">
+      <span class="text-lg text-gray-500">{{ priceWithDiscount() | currency: 'S/ ' }}</span>
+      @if(discountPercentageRound() > 0){
+        <div class="bg-red-500 text-white p-1 rounded-md text-xs h-6">{{ discountPercentage() | discountPorcent }}</div>
+      }
+    </div>
+    <span class="text-base line-through text-gray-400"
+      [ngClass]="discountPercentageRound() > 0 ? 'opacity-100' : 'opacity-0'"
+    >{{ price() | currency: 'S/ ' }}</span>
+</div>
