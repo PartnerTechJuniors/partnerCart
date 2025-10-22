@@ -14,6 +14,7 @@ import { QuantitySelector } from "@componentsquantity-selector/quantity-selector
 export class CartItem {
   cartService = inject(CartService);
   item = input.required<Product>();
+  last= input();
   
   priceWithDiscount(){
     return this.item().price * (1 - this.item().discountPercentage / 100);

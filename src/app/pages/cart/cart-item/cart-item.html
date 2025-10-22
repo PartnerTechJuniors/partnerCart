@@ -1,5 +1,6 @@
 <div
-  class="border-b border-gray-200"
+class="border-b border-gray-200"
+[class.border-b-0]="last()"
 >
   <div class="flex gap-5 justify-between items-center py-4">
     <div class="flex gap-5 w-1/2">
@@ -17,11 +18,11 @@
       </div>
     </div>
 
-    <div class="font-medium flex flex-col">
+    <div class="font-medium flex flex-col justify-start content-start items-start">
         <div class="flex gap-2">
           <span class="text-lg text-gray-500">{{ priceWithDiscount() | currency: 'S/ ' }}</span>
           @if(discountPercentageRound() > 0){
-            <div class="bg-red-500 text-white p-1 rounded-md text-xs">-{{ discountPercentageRound() }}%</div>
+            <div class="bg-red-500 text-white p-1 rounded-md text-xs h-6">-{{ discountPercentageRound() }}%</div>
           }
         </div>
         <span class="text-base line-through text-gray-400"
@@ -33,6 +34,7 @@
       <app-quantity-selector [item]="item()" />
 
       <app-button
+        [extraClass]="'hover:scale-105'"
         (btnClicked)="cartService.removeFromCart(item().id)"
       >
         <app-icontrash />
