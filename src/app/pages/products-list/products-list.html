@@ -42,7 +42,7 @@
       <div class="w-full">
         <div class="bg-white px-3 py-4 rounded-xl mb-3 flex justify-between">
           <div class="flex sm:gap-7 gap-2 text-sm">
-            <span class="text-gray-500">Resultados ({{ products().length }})</span>
+            <span class="text-gray-500">Resultados ({{ total() }})</span>
             <button (click)="clearFilters()" class="underline cursor-pointer">Limpiar filtros</button>
           </div>
           <!-- Pagination -->
@@ -50,9 +50,14 @@
             
           </div>
         </div>
-        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3">
+        <div class="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3"
+          infiniteScroll
+          [infiniteScrollDistance]="2"
+          [infiniteScrollThrottle]="50"
+          (scrolled)="onScrollDown()"
+        >
           @for (p of products(); track p.id) {
-            @defer (on viewport) {
+            @defer (on timer(1000ms)) {
               <app-product-card [p]="p" />
             } @placeholder (minimum 500ms){
               <app-skeleton />

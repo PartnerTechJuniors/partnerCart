@@ -4,10 +4,13 @@ import { Injectable } from '@angular/core';
   providedIn: 'root'
 })
 export class ProductService {
-  async getAllProducts(){
-    const res = await fetch('https://dummyjson.com/products?limit=40&skip=0');
+  async getAllProducts(limit: number = 12, skip: number = 0){
+    const res = await fetch(`https://dummyjson.com/products?limit=${limit}&skip=${skip}`);
     const data = await res.json();
-    return data['products'];
+    return {
+      products: data['products'],
+      total: data['total']
+    };
   }
 
   async getByCategory(categoryName: string){
