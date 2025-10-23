@@ -24,21 +24,21 @@
         <p class="text-xl text-center">Resumen de orden</p> 
         <div class="py-4 flex justify-between border-b border-gray-300">
           <p>Productos ({{ cartService.countQuantityProduct()}})</p>
-          <p>{{ cartService.getTotalCart() | currency: 'S/  ' }}</p>
+          <p [countUp]="cartService.getTotalCart()" [options]="countUpOptions" class="pointer-events-none">0</p>
         </div>
         @if(cartService.countQuantityProductWithoutDiscount() > 0){
           <div class="py-4 flex justify-between border-b border-gray-300">
             <p>Descuentos ({{ cartService.countQuantityProductWithoutDiscount() }})</p>
-            <p>{{ cartService.getTotalCartWithDiscount() - cartService.getTotalCart()  | currency: 'S/  ' }}</p>
+            <p [countUp]="cartService.getTotalCartWithDiscount() - cartService.getTotalCart()" [options]="countUpOptions" class="pointer-events-none">0</p>
           </div>
         }
         <div class="py-4 flex justify-between">
           <p>Total:</p>
-          <p>{{ cartService.getTotalCartWithDiscount() | currency: 'S/  ' }}</p>
+          <p [countUp]="cartService.getTotalCartWithDiscount()" [options]="countUpOptions" class="pointer-events-none">0</p>
         </div>
         <app-primary-button 
           [extraClass]="'from-gray-800 via-gray-600 to-gray-800 focus:ring-gray-700'"
-          label="Continuar compra"
+          label="Continuar comprando"
           (btnClick)="cartService.continuePurchase()" />
       </div>
     </div>
