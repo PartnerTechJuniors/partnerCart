@@ -26,45 +26,48 @@ export class ProductsList implements OnInit {
 
   async ngOnInit(){
     const resApi = await this.productService.getAllProducts(this.limit, this.skip)
-    this.allProducts.set(resApi.products);
+    const resallapi = await this.productService.getAllProducts(resApi.total)
     this.products.set(resApi.products);
+    this.allProducts.set(resallapi.products);
     this.total.set(resApi.total);
 
     this.categories.set(await this.productService.getListCategories());
 
-    const brands = [...new Set(resApi.products.map((p: Product) => p.brand))].filter((brand): brand is string => brand !== undefined);
+    const brands = [...new Set(resallapi.products.map((p: Product) => p.brand))].filter((brand): brand is string => brand !== undefined);
 
     this.brands.set(brands);
   }
 
   async filterByCategory(categoryName: string){
+    this.products.set([]);
     this.products.set(await this.productService.getByCategory(categoryName));
-    this.allProducts.set(await this.productService.getByCategory(categoryName));
     this.categoryActive.set(categoryName);
     this.brandActive.set('');
   }
 
   filterByBrand(brandName: string) {
-    const base = this.categoryActive()
-      ? this.products()
-      : this.allProducts();
-
-    const filtered = base.filter(p => p.brand === brandName);
+    if(brandName !== this.brandActive()){
+      this.products.set([]);
+      this.products.set(this.allProducts());
+    }
+    
+    const filtered = this.products().filter(p => p.brand === brandName);
 
     this.products.set(filtered);
-    this.allProducts.set(filtered);
     this.brandActive.set(brandName);
   }
 
   clearFilters() {
+    this.products.set([]);
     this.products.set(this.allProducts());
-    this.allProducts.set(this.allProducts());
     this.categoryActive.set('');
     this.brandActive.set('');
   }
 
   async onScrollDown(){
     if (this.loading) return;
+    if (this.categoryActive().length > 0) return;
+    if (this.brandActive().length > 0) return;
     this.loading = true;
 
     const response = await this.productService.getAllProducts(this.limit, this.skip);
@@ -72,10 +75,6 @@ export class ProductsList implements OnInit {
     this.skip += this.limit;
 
     this.products.update(prev => [...prev, ...response.products]);
-
-    const brands = [...new Set(response.products.map((p: Product) => p.brand))].filter((brand): brand is string => brand !== undefined);
-
-    this.brands.update(prev => [...prev, ...brands]);
 
     this.loading = false;
   }
