@@ -1,0 +1,25 @@
+<div class="fixed bottom-5 right-5 flex flex-col gap-2 z-50">
+  @for (toast of toastService.notifies(); track toast.id) {
+    <div
+      class="p-2 px-4 rounded-xl shadow-xl bg-white text-black flex items-center gap-2 w-fit max-w-max border-[1px] border-black/20 animate-fadein transition-all transform"
+    >
+      @switch (toast.type) {
+        @case ('success') {
+          <i-lucide [img]="CheckCircle2" class="text-green-500" size="18" />
+        }
+        @case ('error') {
+          <i-lucide [img]="XCircle" class="text-red-500" size="18" />
+        }
+        @case ('info') {
+          <i-lucide [img]="InfoIcon" class="text-blue-500" size="18" />
+        }
+        @case ('warning') {
+          <i-lucide [img]="MessageCircleWarningIcon" class="text-yellow-500" size="18" />
+        }
+      }
+
+      <span class="font-normal">{{ toast.message }}</span>
+      <i-lucide [img]="XIcon" class="cursor-pointer" size="15" (click)="toastService.removeToast(toast.id)" />
+    </div>
+  }
+</div>
