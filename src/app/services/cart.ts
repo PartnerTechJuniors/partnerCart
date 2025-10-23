@@ -1,10 +1,13 @@
-import { Injectable, signal } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
 import { Product } from '@app/types/product';
+import { ToastNotify } from './toast';
 
 @Injectable({
   providedIn: 'root'
 })
 export class CartService {
+  toastService = inject(ToastNotify);
+
   private cart = signal<Product[]>([]);
 
   public cartitems = this.cart.asReadonly();
@@ -46,10 +49,12 @@ export class CartService {
 
       return [...items, { ...product, quantity: 1 }];
     });
+    this.toastService.displayToast('Producto agregado');
   }
 
   removeFromCart(id: number){
     this.cart.update(items => items.filter(p => p.id !== id));
+    this.toastService.displayToast('Producto removido');
   }
   
   decreaseQuantity(id: number) {
@@ -62,6 +67,20 @@ export class CartService {
         )
         .filter(p => p.quantity! > 0)
     );
+    this.toastService.displayToast('Cantidad reducida');
+  }
+
+  increaseQuantity(id: number) {
+    this.cart.update(items =>
+      items
+        .map(p =>
+          p.id === id
+            ? { ...p, quantity: Math.max((p.quantity ?? 1) + 1, 0) }
+            : p
+        )
+        .filter(p => p.quantity! > 0)
+    );
+    this.toastService.displayToast('Cantidad agregada');
   }
   
   updateQuantity(id: number, quantity: number) {
