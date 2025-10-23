@@ -16,6 +16,9 @@
   } @else {
     <div class="flex gap-2">
       <div class="w-9/12 bg-white rounded-lg p-5 max-h-max">
+        <div>
+            <button (click)="cartService.clearCart()" class="underline cursor-pointer">Vaciar carrito</button>
+        </div>
         @for (item of cartService.cartitems(); track item.id; let last = $last) {
           <app-cart-item [item]="item" [last]="last" />
         } 
