@@ -11,7 +11,7 @@
 
   <app-button
     [extraClass]="'bg-gray-900 text-gray-200 font-semibold px-2.5 py-1'"
-    (btnClicked)="cartService.addToCart(item())"
+    (btnClicked)="cartService.increaseQuantity(item().id)"
     label="+"
   />
 </div>
