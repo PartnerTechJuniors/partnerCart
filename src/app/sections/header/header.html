@@ -5,7 +5,9 @@
         <img src="/favicon.png" alt="" class="size-12 mr-1">
         <span class="text-lg font-semibold">{{ nameShop() }}</span>
       </div>
-      <app-primary-button [label]="'Carrito (' + cartService.countQuantityProduct() + ')'" [routerLink]="['/cart']"/>
+      <app-primary-button [label]="'(' + cartService.countQuantityProduct() + ')'" [routerLink]="['/cart']">
+        <i-lucide [img]="ShoppingCartIcon" class="my-icon" size="18" />
+      </app-primary-button>
     </header>
   </div>
 } @placeholder {
